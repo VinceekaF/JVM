@@ -21,7 +21,7 @@ export class AbsencesComponent implements OnInit {
 
   constructor(private absenceService: AbsenceService, private fb: FormBuilder) { }
   
-// Créer un lien entre l'ordonnancement' et le filtrage
+// Créer un lien entre l'ordonnancement et le filtrage
 
 
   ngOnInit() {
