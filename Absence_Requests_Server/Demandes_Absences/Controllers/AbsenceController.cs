@@ -44,7 +44,12 @@ namespace Demandes_Absences.Controllers
         {
             return bo.GetReasons();
         }
-       
+
+        [HttpPost("[action]")]
+        public void AddAbsence(Absence absence)
+        {
+            bo.AddAbsence(absence);
+        }
 
     }
 }

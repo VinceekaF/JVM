@@ -34,5 +34,11 @@ namespace Demandes_Absences.BL
         {
             return Enum.GetNames(typeof(Reason));
         }
+
+        public void AddAbsence(Absence absence)
+        {
+            absence.Status = Status.InProgress;
+            absenceRepository.AddAbsence(absence);
+        }
     }
 }

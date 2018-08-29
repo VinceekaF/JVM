@@ -8,5 +8,7 @@ namespace Demandes_Absences.Models
      interface IAbsenceRepository
     {
         IEnumerable<Absence> GetAllAbsence();
+
+        void AddAbsence(Absence absence);
     }
 }

@@ -14,5 +14,7 @@ namespace Demandes_Absences.BL
         IEnumerable<Absence> FilterByReason(string reason);
 
         IEnumerable<string> GetReasons();
+
+        void AddAbsence(Absence absence);
     }
 }

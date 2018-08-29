@@ -23,5 +23,10 @@ namespace Demandes_Absences.DAL
         {
             return absences;
         }
+
+        public void AddAbsence(Absence absence)
+        {
+            absences.Add(absence);
+        }
     }
 }
