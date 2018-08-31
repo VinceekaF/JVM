@@ -9,6 +9,7 @@ namespace Demandes_Absences.Models
 {
     public class Absence
     {
+        public int Id { get; set; }
         public DateTime EmissionDate { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }

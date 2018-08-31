@@ -40,5 +40,49 @@ namespace Demandes_Absences.BL
             absence.Status = Status.InProgress;
             absenceRepository.AddAbsence(absence);
         }
+
+        public int SetNbOfDays(DateTime startDate, DateTime endDate)
+        {
+            int offset, nbofWeekendDays, nbOfDays;
+
+            nbOfDays = (int)endDate.Subtract(startDate).TotalDays;
+
+            if (startDate.DayOfWeek == DayOfWeek.Monday && nbOfDays >= 7)
+            {
+                offset = 5;
+            }
+            else if (startDate.DayOfWeek == DayOfWeek.Tuesday && nbOfDays >= 6)
+            {
+                offset = 4;
+
+            }
+            else if (startDate.DayOfWeek == DayOfWeek.Wednesday && nbOfDays >= 5)
+            {
+                offset = 3;
+
+            }
+            else if (startDate.DayOfWeek == DayOfWeek.Thursday && nbOfDays >= 4)
+            {
+                offset = 2;
+
+            }
+            else if (startDate.DayOfWeek == DayOfWeek.Friday && nbOfDays >= 3)
+            {
+                offset = 1;
+
+            }
+            else
+            {
+                offset = 0;
+            }
+
+            if (offset != 0)
+            {
+                nbofWeekendDays = 2 * ((nbOfDays - offset) / 7 + 1);
+                nbOfDays -= nbofWeekendDays;
+            }
+
+            return nbOfDays + 1;
+        }
     }
 }
