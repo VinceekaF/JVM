@@ -19,5 +19,7 @@ namespace Demandes_Absences.BL
         void AddAbsence(Absence absence);
 
         int SetNbOfDays(DateTime startDate, DateTime endDate);
+
+        IEnumerable<Absence> GetAbsencesFilteredAndSorted(string reason, string sortingDate);
     }
 }

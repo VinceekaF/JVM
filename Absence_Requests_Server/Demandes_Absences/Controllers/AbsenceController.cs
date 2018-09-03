@@ -40,6 +40,13 @@ namespace Demandes_Absences.Controllers
         }
 
         [HttpGet("[action]")]
+        public List<Absence> GetAbsencesFilteredAndSorted(string reason, string sortingDate) //TODO Rename
+        {
+
+            return bo.GetAbsencesFilteredAndSorted(reason, sortingDate).ToList();
+        }
+
+        [HttpGet("[action]")]
         public IEnumerable<string> GetReasons()
         {
             return bo.GetReasons();
@@ -49,6 +56,12 @@ namespace Demandes_Absences.Controllers
         public void AddAbsence(Absence absence)
         {
             bo.AddAbsence(absence);
+        }
+
+        [HttpPost("[action]")]
+        public int SetNbOfDays(DateTime startDate, DateTime endDate)
+        {
+            return bo.SetNbOfDays(startDate, endDate);
         }
 
     }

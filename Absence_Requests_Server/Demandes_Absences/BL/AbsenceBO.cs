@@ -84,5 +84,34 @@ namespace Demandes_Absences.BL
 
             return nbOfDays + 1;
         }
+
+
+        public IEnumerable<Absence> GetAbsencesFilteredAndSorted(string reason, string sortingDate)
+        {
+            if (reason != null)
+            {
+                return SortAbsences(absenceRepository.GetAllAbsence().Where(n => n.Reason.ToString() == reason), sortingDate);
+            }
+
+            return SortAbsences(absenceRepository.GetAllAbsence(), sortingDate);
+        }
+
+        public IEnumerable<Absence> SortAbsences(IEnumerable<Absence> absences, string sortingDate)
+        {
+            if (sortingDate != null)
+            {
+                if (sortingDate == "SortByEmissionDate")
+                {
+                    absences = SortByEmissionDate();
+                }
+                else
+                {
+                    absences = SortByStartDate();
+                }
+            }
+
+            return absences;
+        }
+
     }
 }

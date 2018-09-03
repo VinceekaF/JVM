@@ -11,7 +11,7 @@ import { catchError, map, tap  } from 'rxjs/operators';
 export class AbsenceService {
   private headers: HttpHeaders;
   
-  private accessPointUrl: string = 'https://localhost:44362/api/Absence';
+  private accessPointUrl: string = 'https://localhost:60732/api/Absence';
 
   constructor(private http: HttpClient) { 
     this.headers = new HttpHeaders({'Content-Type': 'application/json; charset=utf-8'});
