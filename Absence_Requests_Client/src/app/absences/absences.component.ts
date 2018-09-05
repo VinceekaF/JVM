@@ -41,14 +41,14 @@ export class AbsencesComponent implements OnInit {
       this.sortChoice = 'startDate';
     }
    
-    this.GetAbsencesFilteredAndSorted();
+    this.getAbsencesFilteredAndSorted();
   }
   
   filterChange(reasonValue: string):void {
     this.reasonChoice = reasonValue;
     console.log(this.reasonChoice);
     if (this.reasonChoice != 'No Filter'){
-      this.GetAbsencesFilteredAndSorted();
+      this.getAbsencesFilteredAndSorted();
     }
     else{
       this.getAbsences();
@@ -56,8 +56,8 @@ export class AbsencesComponent implements OnInit {
   }
   
 
-  GetAbsencesFilteredAndSorted(): void {
-    this.absenceService.GetAbsencesFilteredAndSorted(this.reasonChoice,this.sortChoice).subscribe(abs=> this.absences = abs);
+  getAbsencesFilteredAndSorted(): void {
+    this.absenceService.getAbsencesFilteredAndSorted(this.reasonChoice,this.sortChoice).subscribe(abs=> this.absences = abs);
   }
 
 

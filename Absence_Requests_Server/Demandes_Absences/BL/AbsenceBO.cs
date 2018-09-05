@@ -37,6 +37,7 @@ namespace Demandes_Absences.BL
 
         public void AddAbsence(Absence absence)
         {
+            absence.EmissionDate = DateTime.Now;
             absence.Status = Status.InProgress;
             absenceRepository.AddAbsence(absence);
         }

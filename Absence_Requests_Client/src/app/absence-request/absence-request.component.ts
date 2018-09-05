@@ -14,6 +14,6 @@ export class AbsenceRequestComponent implements OnInit {
   }
 
   submit():void {
-    this.absenceService .Submit();
+    this.absenceService.submit();
   }
 }

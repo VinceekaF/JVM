@@ -49,7 +49,7 @@ export class AbsenceService {
       catchError(this.handleError<Absence[]>('absences', [])));
   }
 
-  public GetAbsencesFilteredAndSorted(reason: string, sort:string){
+  public getAbsencesFilteredAndSorted(reason: string, sort:string){
     //let params= new HttpParams().set('reason', reason).append('sort', sort);
     let data = {'reason': reason, 'sortingDate':sort};
     console.log('reason: ' + reason);
@@ -59,8 +59,8 @@ export class AbsenceService {
       catchError(this.handleError<Absence[]>('absences', [])));
   }
 
-  public Submit(): void{
-    
+  public submit(): void{
+
   }
 
  
