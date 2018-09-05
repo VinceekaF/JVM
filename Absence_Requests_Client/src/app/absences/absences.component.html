@@ -4,14 +4,19 @@
   </select>
 </form>
 
-<form [formGroup]="filterByReasonForm">
+<!-- <form [formGroup]="filterByReasonForm">
   <label>
     Filter By
   </label>
   <select formControlName="filterByReasonControl" (change)="filterChange($event.target.value)">
     <option [value]="reason" *ngFor="let reason of reasons" >{{reason}}</option>
   </select>
-</form>
+</form> -->
+
+<label>
+    Filter By
+</label>
+<app-app-reason (change)="filterChange($event.target.value)"></app-app-reason>
 
 <table>
   <thead>

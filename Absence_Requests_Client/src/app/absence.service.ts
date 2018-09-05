@@ -11,7 +11,7 @@ import { catchError } from 'rxjs/operators';
 export class AbsenceService {
   private headers: HttpHeaders;
   
-  private accessPointUrl: string = 'http://localhost:60732/api/Absence';
+  private accessPointUrl: string = 'http://localhost:52067/api/Absence';
 
   constructor(private http: HttpClient) { 
     this.headers = new HttpHeaders({'Content-Type': 'application/json; charset=utf-8'});
@@ -57,6 +57,10 @@ export class AbsenceService {
     const url = `${this.accessPointUrl}/GetAbsencesFilteredAndSorted`;
     return this.http.get<Absence[]>(url, {params: data}).pipe(
       catchError(this.handleError<Absence[]>('absences', [])));
+  }
+
+  public Submit(): void{
+    
   }
 
  

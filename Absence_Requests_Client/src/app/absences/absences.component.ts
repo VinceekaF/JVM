@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AbsenceService } from '../absence.service';
 import { Absence } from '../absence';
 import { FormGroup, FormBuilder } from '@angular/forms';
+import { AppReasonComponent }  from '../app-reason/app-reason.component'
+
 
 @Component({
   selector: 'app-absences',
@@ -15,7 +17,7 @@ export class AbsencesComponent implements OnInit {
   absences: Absence[];
   choices: string[] = ['Order by Nothing','Order by Emission date','Order by Start Date'];
   sortChoice: string = 'Order by Nothing';
-  reasonChoice: string = 'No filter';
+  reasonChoice: string = 'No Filter';
   reasons: string[] = ['No Filter','PaidVacation','RTT','SickChild','LeaveFamilyEvents'];
  
 
@@ -26,7 +28,7 @@ export class AbsencesComponent implements OnInit {
     this.choiceForm = this.fb.group({
       choiceControl: ['Order by Nothing']});
     this.filterByReasonForm = this.fb.group({
-      filterByReasonControl: ['No filter']});
+      filterByReasonControl: ['No Filter']});
     this.getAbsences();
   }
   
@@ -38,15 +40,19 @@ export class AbsencesComponent implements OnInit {
     else if(this.sortChoice == 'Order by Start Date'){
       this.sortChoice = 'startDate';
     }
-    else{
-      this.sortChoice = '';
-    }
+   
     this.GetAbsencesFilteredAndSorted();
   }
   
   filterChange(reasonValue: string):void {
     this.reasonChoice = reasonValue;
-    this.GetAbsencesFilteredAndSorted();
+    console.log(this.reasonChoice);
+    if (this.reasonChoice != 'No Filter'){
+      this.GetAbsencesFilteredAndSorted();
+    }
+    else{
+      this.getAbsences();
+    }
   }
   
 

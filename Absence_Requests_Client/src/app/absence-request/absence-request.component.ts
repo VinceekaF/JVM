@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {AbsenceService} from '../absence.service';
 
 @Component({
   selector: 'app-absence-request',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AbsenceRequestComponent implements OnInit {
 
-  constructor() { }
+  constructor(private absenceService: AbsenceService) { }
 
   ngOnInit() {
   }
 
+  submit():void {
+    this.absenceService .Submit();
+  }
 }
