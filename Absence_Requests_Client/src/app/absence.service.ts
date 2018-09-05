@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders,HttpParams } from '@angular/common/http';
 import { Absence } from './absence';
 import { Observable, of } from 'rxjs';
-import { catchError, map, tap  } from 'rxjs/operators';
+import { catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +11,7 @@ import { catchError, map, tap  } from 'rxjs/operators';
 export class AbsenceService {
   private headers: HttpHeaders;
   
-  private accessPointUrl: string = 'https://localhost:60732/api/Absence';
+  private accessPointUrl: string = 'http://localhost:60732/api/Absence';
 
   constructor(private http: HttpClient) { 
     this.headers = new HttpHeaders({'Content-Type': 'application/json; charset=utf-8'});
@@ -46,6 +46,16 @@ export class AbsenceService {
     const params= new HttpParams().set('reason', reason);
     const url = `${this.accessPointUrl}/FilterByReason`;
     return this.http.get<Absence[]>(url, {params: params}).pipe(
+      catchError(this.handleError<Absence[]>('absences', [])));
+  }
+
+  public GetAbsencesFilteredAndSorted(reason: string, sort:string){
+    //let params= new HttpParams().set('reason', reason).append('sort', sort);
+    let data = {'reason': reason, 'sortingDate':sort};
+    console.log('reason: ' + reason);
+    console.log('sort: ' + sort);
+    const url = `${this.accessPointUrl}/GetAbsencesFilteredAndSorted`;
+    return this.http.get<Absence[]>(url, {params: data}).pipe(
       catchError(this.handleError<Absence[]>('absences', [])));
   }
 

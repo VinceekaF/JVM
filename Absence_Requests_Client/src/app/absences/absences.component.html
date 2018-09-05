@@ -1,5 +1,5 @@
 <form [formGroup]="choiceForm">
-  <select formControlName="choiceControl" (change)="onChange($event)">
+  <select formControlName="choiceControl" (change)="onChange($event.target.value)">
     <option [value]="choice" *ngFor="let choice of choices" >{{choice}}</option>
   </select>
 </form>
@@ -8,7 +8,7 @@
   <label>
     Filter By
   </label>
-  <select formControlName="filterByReasonControl" (change)="filterChange($event)">
+  <select formControlName="filterByReasonControl" (change)="filterChange($event.target.value)">
     <option [value]="reason" *ngFor="let reason of reasons" >{{reason}}</option>
   </select>
 </form>

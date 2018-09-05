@@ -100,13 +100,13 @@ namespace Demandes_Absences.BL
         {
             if (sortingDate != null)
             {
-                if (sortingDate == "SortByEmissionDate")
+                if (sortingDate == "emissionDate")
                 {
-                    absences = SortByEmissionDate();
+                    absences = absences.OrderBy(n => n.EmissionDate);
                 }
                 else
                 {
-                    absences = SortByStartDate();
+                    absences = absences.OrderBy(a => a.StartDate);
                 }
             }
 
