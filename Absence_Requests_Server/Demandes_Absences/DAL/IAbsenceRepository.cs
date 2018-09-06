@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Demandes_Absences.Models
 {
-     interface IAbsenceRepository
+    interface IAbsenceRepository
     {
         IEnumerable<Absence> GetAllAbsence();
 

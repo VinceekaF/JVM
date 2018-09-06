@@ -1,20 +1,11 @@
 <form [formGroup]="choiceForm">
   <select formControlName="choiceControl" (change)="onChange($event.target.value)">
-    <option [value]="choice" *ngFor="let choice of choices" >{{choice}}</option>
+    <option [value]="choice" *ngFor="let choice of choices">{{choice}}</option>
   </select>
 </form>
 
-<!-- <form [formGroup]="filterByReasonForm">
-  <label>
-    Filter By
-  </label>
-  <select formControlName="filterByReasonControl" (change)="filterChange($event.target.value)">
-    <option [value]="reason" *ngFor="let reason of reasons" >{{reason}}</option>
-  </select>
-</form> -->
-
 <label>
-    Filter By
+  Filter By
 </label>
 <app-app-reason (change)="filterChange($event.target.value)"></app-app-reason>
 
@@ -29,7 +20,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let absence of absences"> 
+    <tr *ngFor="let absence of absences">
       <td>{{ absence.emissionDate | date:'shortDate'}}</td>
       <td>{{ absence.reason}}</td>
       <td>{{ absence.startDate | date:'shortDate'}}</td>
@@ -42,5 +33,3 @@
 <nav>
   <a routerLink="/absence-request">Add</a>
 </nav>
-
-

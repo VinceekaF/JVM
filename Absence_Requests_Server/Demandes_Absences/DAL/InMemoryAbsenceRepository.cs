@@ -8,6 +8,30 @@ namespace Demandes_Absences.DAL
 {
     public class InMemoryAbsenceRepository : IAbsenceRepository
     {
+        #region Singleton
+        private static InMemoryAbsenceRepository instance = null;
+        private static readonly object padLock = new object();
+
+        private InMemoryAbsenceRepository()
+        {
+        }
+
+        public static InMemoryAbsenceRepository Instance
+        {
+            get
+            {
+                lock (padLock)
+                {
+                    if (instance == null)
+                    {
+                        instance = new InMemoryAbsenceRepository();
+                    }
+                    return instance;
+                }
+            }
+        }
+        #endregion
+
         public List<Absence> absences = new List<Absence>()
             {
                new Absence() {Id= 0, EmissionDate=new DateTime(2018, 07, 31), StartDate=new DateTime(2018, 08, 16), EndDate=new DateTime(2018, 08, 20), Reason=Reason.LeaveFamilyEvents, Status=Status.Approved},

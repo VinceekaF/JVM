@@ -9,7 +9,7 @@ namespace Demandes_Absences.Models
 {
     public class Absence
     {
-        public int Id { get; set; }
+        public int Id { get; set; } //todo : guid
         public DateTime EmissionDate { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
@@ -19,7 +19,6 @@ namespace Demandes_Absences.Models
 
         [JsonConverter(typeof(StringEnumConverter))]
         public Status Status { get; set; }
-
     }
 
     public enum Reason

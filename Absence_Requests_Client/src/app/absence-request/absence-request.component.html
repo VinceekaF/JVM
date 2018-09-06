@@ -1,11 +1,25 @@
-
 <label>
   Reason
 </label>
-<app-app-reason></app-app-reason>
+<app-app-reason (change)="reasonChange($event.target.value)"></app-app-reason>
 
+<mat-form-field>
+  <input matInput [matDatepicker]="picker1" placeholder="Start:" [formControl]="formStartDate" (dateChange)="SetDates(event)"
+    required>
+  <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+  <mat-datepicker #picker1></mat-datepicker>
+  <mat-error>This field is required</mat-error>
+</mat-form-field>
 
+<mat-form-field>
+  <input matInput [matDatepicker]="picker2" placeholder="End:" [formControl]="formEndDate" (dateChange)="SetDates(event)" required>
+  <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+  <mat-datepicker #picker2></mat-datepicker>
+  <mat-error>This field is required</mat-error>
+</mat-form-field>
+
+<div>Number of day: {{nbOfDays}}</div>
 
 <form>
-  <button type='submit' (ngClick)='Submit()'>Submit</button>
+  <button type='submit' (click)='submit()'>Submit</button>
 </form>

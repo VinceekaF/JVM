@@ -8,17 +8,11 @@ namespace Demandes_Absences.BL
     {
         IEnumerable<Absence> GetAllAbsence();
 
-        IEnumerable<Absence> SortByEmissionDate();
-
-        IEnumerable<Absence> SortByStartDate();
-
         IEnumerable<Absence> FilterByReason(string reason);
 
         IEnumerable<string> GetReasons();
 
         void AddAbsence(Absence absence);
-
-        int SetNbOfDays(DateTime startDate, DateTime endDate);
 
         IEnumerable<Absence> GetAbsencesFilteredAndSorted(string reason, string sortingDate);
     }

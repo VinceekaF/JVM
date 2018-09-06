@@ -22,47 +22,15 @@ namespace Demandes_Absences.Controllers
         }
 
         [HttpGet("[action]")]
-        public List<Absence> SortByEmissionDate()
+        public List<Absence> GetAbsencesFilteredAndSorted(string reason, string sortingDate)
         {
-            return bo.SortByEmissionDate().ToList();
-        }
-
-        [HttpGet("[action]")]
-        public List<Absence> SortByStartDate()
-        {
-            return bo.SortByStartDate().ToList();
-        }
-
-        [HttpGet("FilterByReason")]
-        public List<Absence> FilterByReason(string reason)
-        {
-            return bo.FilterByReason(reason).ToList();
-        }
-
-        [HttpGet("[action]")]
-        public List<Absence> GetAbsencesFilteredAndSorted(string reason, string sortingDate) //TODO Rename
-        {
-
             return bo.GetAbsencesFilteredAndSorted(reason, sortingDate).ToList();
         }
 
-        [HttpGet("[action]")]
-        public IEnumerable<string> GetReasons()
-        {
-            return bo.GetReasons();
-        }
-
         [HttpPost("[action]")]
-        public void AddAbsence(Absence absence)
+        public void AddAbsence([FromBody] Absence absence)
         {
             bo.AddAbsence(absence);
         }
-
-        [HttpPost("[action]")]
-        public int SetNbOfDays(DateTime startDate, DateTime endDate)
-        {
-            return bo.SetNbOfDays(startDate, endDate);
-        }
-
     }
 }

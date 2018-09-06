@@ -5,7 +5,4 @@ export class Absence {
     endDate: Date;
     reason: string;
     status: string;
-  
 }
-
-

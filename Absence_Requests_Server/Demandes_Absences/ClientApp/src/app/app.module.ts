@@ -14,3 +14,6 @@ import { AppComponent } from './app.component';
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+
+//todo : don't need all of this in the back !

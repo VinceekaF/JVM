@@ -9,20 +9,11 @@ namespace Demandes_Absences.BL
 {
     public class AbsenceBO : IAbsenceBO
     {
-        IAbsenceRepository absenceRepository = new InMemoryAbsenceRepository();
+        IAbsenceRepository absenceRepository = InMemoryAbsenceRepository.Instance;
 
         public IEnumerable<Absence> GetAllAbsence()
         {
             return absenceRepository.GetAllAbsence();
-        }
-
-        public IEnumerable<Absence> SortByEmissionDate()
-        {
-            return absenceRepository.GetAllAbsence().OrderBy(n => n.EmissionDate);
-        }
-        public IEnumerable<Absence> SortByStartDate()
-        {
-            return absenceRepository.GetAllAbsence().OrderBy(n => n.StartDate);
         }
 
         public IEnumerable<Absence> FilterByReason(string reason)
@@ -30,68 +21,23 @@ namespace Demandes_Absences.BL
             return absenceRepository.GetAllAbsence().Where(n => n.Reason.ToString() == reason);
         }
 
-        public IEnumerable<string> GetReasons()
+        public IEnumerable<string> GetReasons()     //todo : really need it ?
         {
             return Enum.GetNames(typeof(Reason));
         }
 
         public void AddAbsence(Absence absence)
         {
-            absence.EmissionDate = DateTime.Now;
-            absence.Status = Status.InProgress;
+            absence.EmissionDate = DateTime.Now;    //todo : initialize in front
+            absence.Status = Status.InProgress;     //todo : initialize in front
             absenceRepository.AddAbsence(absence);
         }
 
-        public int SetNbOfDays(DateTime startDate, DateTime endDate)
-        {
-            int offset, nbofWeekendDays, nbOfDays;
-
-            nbOfDays = (int)endDate.Subtract(startDate).TotalDays;
-
-            if (startDate.DayOfWeek == DayOfWeek.Monday && nbOfDays >= 7)
-            {
-                offset = 5;
-            }
-            else if (startDate.DayOfWeek == DayOfWeek.Tuesday && nbOfDays >= 6)
-            {
-                offset = 4;
-
-            }
-            else if (startDate.DayOfWeek == DayOfWeek.Wednesday && nbOfDays >= 5)
-            {
-                offset = 3;
-
-            }
-            else if (startDate.DayOfWeek == DayOfWeek.Thursday && nbOfDays >= 4)
-            {
-                offset = 2;
-
-            }
-            else if (startDate.DayOfWeek == DayOfWeek.Friday && nbOfDays >= 3)
-            {
-                offset = 1;
-
-            }
-            else
-            {
-                offset = 0;
-            }
-
-            if (offset != 0)
-            {
-                nbofWeekendDays = 2 * ((nbOfDays - offset) / 7 + 1);
-                nbOfDays -= nbofWeekendDays;
-            }
-
-            return nbOfDays + 1;
-        }
-
-
         public IEnumerable<Absence> GetAbsencesFilteredAndSorted(string reason, string sortingDate)
         {
-            if (reason != null)
+            if (reason != "null")
             {
-                return SortAbsences(absenceRepository.GetAllAbsence().Where(n => n.Reason.ToString() == reason), sortingDate);
+                return SortAbsences(FilterByReason(reason), sortingDate);
             }
 
             return SortAbsences(absenceRepository.GetAllAbsence(), sortingDate);
@@ -113,6 +59,5 @@ namespace Demandes_Absences.BL
 
             return absences;
         }
-
     }
 }
