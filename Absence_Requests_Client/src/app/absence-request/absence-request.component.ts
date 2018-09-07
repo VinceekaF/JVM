@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Location } from '@angular/common'
+import { Location } from '@angular/common';
 import { FormControl } from '@angular/forms';
-import * as Moment from 'moment'
+import * as Moment from 'moment';
 
 import { AbsenceService } from '../absence.service';
 import { Absence } from '../absence';
@@ -31,7 +31,7 @@ export class AbsenceRequestComponent implements OnInit {
     this.reasonChoice = reasonValue;
   }
 
-  SetDates() {
+  setDates() {
     let offset: number;
     let nbOfWeekendDays: number;
     this.startDate = Moment(this.formStartDate.value, "M/D/YYYY").startOf("day");
@@ -69,6 +69,8 @@ export class AbsenceRequestComponent implements OnInit {
   submit(): void {
     //todo : need validation before submit, otherwise some corrupted value could be send
     //both date should be selected
+    //endDate>=startDate
+    //we should not select weekend 
 
     let absence: Absence = {
       startDate: this.startDate.toDate(),

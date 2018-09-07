@@ -28,9 +28,9 @@ namespace Demandes_Absences.Controllers
         }
 
         [HttpPost("[action]")]
-        public void AddAbsence([FromBody] Absence absence)
+        public void AddAbsence([FromBody] Absence absence)  //todo : verify frombody
         {
-            bo.AddAbsence(absence);
+            bo.AddAbsence(absence); //todo verify null?
         }
     }
 }

@@ -9,7 +9,7 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 
 export class AppReasonComponent implements OnInit {
   ReasonForm: FormGroup;
-  reasons: string[] = ['No Filter', 'PaidVacation', 'RTT', 'SickChild', 'LeaveFamilyEvents'];
+  reasons: string[] = ['No Filter', 'PaidVacation', 'RTT', 'SickChild', 'LeaveFamilyEvents']; //todo getreasons from back
 
   constructor(private fb: FormBuilder) { }
 

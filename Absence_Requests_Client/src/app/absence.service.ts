@@ -29,8 +29,7 @@ export class AbsenceService {
       catchError(this.handleError<Absence[]>('absences', [])));;
   }
 
-  public getAbsencesFilteredAndSorted(reason: string, sort: string) {  //type de retour void ?
-    //let params= new HttpParams().set('reason', reason).append('sort', sort);
+  public getAbsencesFilteredAndSorted(reason: string, sort: string): Observable<Absence[]> {
     let data = { 'reason': reason, 'sortingDate': sort };
     const url = `${this.accessPointUrl}/GetAbsencesFilteredAndSorted`;
     return this.http.get<Absence[]>(url, { params: data }).pipe(

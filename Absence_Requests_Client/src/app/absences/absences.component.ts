@@ -12,12 +12,12 @@ import { Absence } from '../absence';
 
 export class AbsencesComponent implements OnInit {
   choiceForm: FormGroup;
-  filterByReasonForm: FormGroup;
+ // filterByReasonForm: FormGroup;
   absences: Absence[];
   choices: string[] = ['Order by Nothing', 'Order by Emission date', 'Order by Start Date'];
   sortChoice: string = 'Order by Nothing';
   reasonChoice: string = null;
-  reasons: string[] = ['No Filter', 'PaidVacation', 'RTT', 'SickChild', 'LeaveFamilyEvents'];
+  //reasons: string[] = ['No Filter', 'PaidVacation', 'RTT', 'SickChild', 'LeaveFamilyEvents']; //needed ??
 
   constructor(
     private absenceService: AbsenceService,
@@ -27,9 +27,9 @@ export class AbsencesComponent implements OnInit {
     this.choiceForm = this.fb.group({
       choiceControl: ['Order by Nothing']
     });
-    this.filterByReasonForm = this.fb.group({
-      filterByReasonControl: ['No Filter']
-    });
+    // this.filterByReasonForm = this.fb.group({
+    //   filterByReasonControl: ['No Filter']
+    // });
     this.getAbsences();
   }
 
