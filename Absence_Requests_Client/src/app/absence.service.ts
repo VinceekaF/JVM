@@ -11,7 +11,7 @@ import { Absence } from './absence';
 
 export class AbsenceService {
   private headers: HttpHeaders;
-  private accessPointUrl: string = 'http://localhost:63983/api/Absence';
+  private accessPointUrl = 'http://localhost:50418/api/Absence';
 
   constructor(private http: HttpClient) {
     this.headers = new HttpHeaders({ 'Content-Type': 'application/json; charset=utf-8' });
@@ -20,17 +20,17 @@ export class AbsenceService {
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       return of(result as T);
-    }
+    };
   }
 
   public getAbsences(): Observable<Absence[]> {
     const url = `${this.accessPointUrl}/GetAllAbsences`;
     return this.http.get<Absence[]>(url, { headers: this.headers }).pipe(
-      catchError(this.handleError<Absence[]>('absences', [])));;
+      catchError(this.handleError<Absence[]>('absences', [])));
   }
 
   public getAbsencesFilteredAndSorted(reason: string, sort: string): Observable<Absence[]> {
-    let data = { 'reason': reason, 'sortingDate': sort };
+    const data = { 'reason': reason, 'sortingDate': sort };
     const url = `${this.accessPointUrl}/GetAbsencesFilteredAndSorted`;
     return this.http.get<Absence[]>(url, { params: data }).pipe(
       catchError(this.handleError<Absence[]>('absences', [])));

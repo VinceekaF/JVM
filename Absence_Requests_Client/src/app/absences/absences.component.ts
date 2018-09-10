@@ -15,9 +15,9 @@ export class AbsencesComponent implements OnInit {
  // filterByReasonForm: FormGroup;
   absences: Absence[];
   choices: string[] = ['Order by Nothing', 'Order by Emission date', 'Order by Start Date'];
-  sortChoice: string = 'Order by Nothing';
+  sortChoice = 'Order by Nothing';
   reasonChoice: string = null;
-  //reasons: string[] = ['No Filter', 'PaidVacation', 'RTT', 'SickChild', 'LeaveFamilyEvents']; //needed ??
+  // reasons: string[] = ['No Filter', 'PaidVacation', 'RTT', 'SickChild', 'LeaveFamilyEvents']; //needed ??
 
   constructor(
     private absenceService: AbsenceService,
@@ -35,10 +35,9 @@ export class AbsencesComponent implements OnInit {
 
   onChange(choiceValue: string): void {
     this.sortChoice = choiceValue;
-    if (this.sortChoice == 'Order by Emission date') {
+    if (this.sortChoice === 'Order by Emission date') {
       this.sortChoice = 'emissionDate';
-    }
-    else if (this.sortChoice == 'Order by Start Date') {
+    } else if (this.sortChoice === 'Order by Start Date') {
       this.sortChoice = 'startDate';
     }
 
@@ -47,10 +46,9 @@ export class AbsencesComponent implements OnInit {
 
   filterChange(reasonValue: string): void {
     this.reasonChoice = reasonValue;
-    if (this.reasonChoice != 'No Filter') {
+    if (this.reasonChoice !== 'No Filter') {
       this.getAbsencesFilteredAndSorted();
-    }
-    else {
+    } else {
       this.getAbsences();
     }
   }

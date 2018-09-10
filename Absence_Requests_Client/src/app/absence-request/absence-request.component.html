@@ -4,7 +4,7 @@
 <app-app-reason (change)="reasonChange($event.target.value)"></app-app-reason>
 
 <mat-form-field>
-  <input matInput [matDatepicker]="picker1" placeholder="Start:" [formControl]="formStartDate" (dateChange)="setDates(event)"
+  <input matInput [matDatepickerFilter]="myFilter" [matDatepicker]="picker1" placeholder="Start:" [formControl]="formStartDate" (dateChange)="setStartDate(event)"
     required>
   <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
   <mat-datepicker #picker1></mat-datepicker>
@@ -12,7 +12,8 @@
 </mat-form-field>
 
 <mat-form-field>
-  <input matInput [matDatepicker]="picker2" placeholder="End:" [formControl]="formEndDate" (dateChange)="setDates(event)" required>
+  <input matInput [matDatepickerFilter]="myFilter" [matDatepicker]="picker2" placeholder="End:" [formControl]="formEndDate" (dateChange)="setEndDate(event)" 
+  required [disabled]="startDatePicked==false" [value]="formStartDate.value" [min]="minDate">
   <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
   <mat-datepicker #picker2></mat-datepicker>
   <mat-error>This field is required</mat-error>
