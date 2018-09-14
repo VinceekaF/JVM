@@ -15,5 +15,6 @@ namespace Demandes_Absences.BL
         void AddAbsence(Absence absence);
 
         IEnumerable<Absence> GetAbsencesFilteredAndSorted(string reason, string sortingDate);
+        void ChangeStatus(string status, int id);
     }
 }

@@ -9,8 +9,8 @@ const routes: Routes = [
   { path: 'starter', component: StarterComponent },
   { path: 'absences', component: AbsencesComponent },
   { path: 'absence-request', component: AbsenceRequestComponent },
-  { path: '', redirectTo: 'starter', pathMatch: 'full' },
-  { path: '**', redirectTo: 'starter', pathMatch: 'full' },
+  { path: '', redirectTo: 'absences', pathMatch: 'full' },
+  { path: '**', redirectTo: 'absences', pathMatch: 'full' },
 ];
 
 @NgModule({

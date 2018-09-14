@@ -1,5 +1,11 @@
-<form [formGroup]="ReasonForm">
+<!-- <form [formGroup]="ReasonForm">
   <select formControlName="ReasonControl">
     <option [value]="reason" *ngFor="let reason of reasons">{{reason}}</option>
   </select>
-</form>
+</form> -->
+
+<mat-form-field [formGroup]="ReasonForm">
+    <mat-select formControlName="ReasonControl">
+      <mat-option [value]="reason" *ngFor="let reason of reasons">{{reason}}</mat-option>
+    </mat-select>
+</mat-form-field>

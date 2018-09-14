@@ -59,5 +59,19 @@ namespace Demandes_Absences.BL
 
             return absences;
         }
+
+        public void ChangeStatus(string status, int id)
+        {
+            var AbsenceToChange = absenceRepository.GetAllAbsence().SingleOrDefault(a => a.Id == id);
+
+            if (status == "Accept")
+            {
+                AbsenceToChange.Status = Status.Approved;
+            }
+            else if(status == "Refuse")
+            {
+                AbsenceToChange.Status = Status.Refused;
+            }
+        }
     }
 }

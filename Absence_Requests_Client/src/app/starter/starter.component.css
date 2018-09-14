@@ -1,12 +1,17 @@
+.role {
+    display: flex;
+    justify-content: space-evenly;
+}
 
-button.mat-button {
+
+
+button.mat-flat-button {
     font-size: 20px;
-    width: 8%;
-    height: 8%;
-   margin-left: 25%;
+    width: 150px;
+    height: 45px;
 }
 
 a {
-    color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
     text-decoration: none;
 }

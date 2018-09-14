@@ -41,4 +41,11 @@ export class AbsenceService {
     return this.http.post<Absence>(url, absence, { headers: this.headers }).pipe(
       catchError(this.handleError<Absence>('absence')));
   }
+
+  public changeStatus(absenceToChange: Absence): Observable<Absence> {
+  
+    const url = `${this.accessPointUrl}/ChangeStatus`;
+    return this.http.put<Absence>(url,absenceToChange, { headers: this.headers }).pipe(
+      catchError(this.handleError<Absence>('absence')));
+  }
 }

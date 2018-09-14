@@ -3,24 +3,26 @@
 </label>
 <app-app-reason (change)="reasonChange($event.target.value)"></app-app-reason>
 
-<mat-form-field>
-  <input matInput [matDatepickerFilter]="myFilter" [matDatepicker]="picker1" placeholder="Start:" [formControl]="formStartDate" (dateChange)="setStartDate(event)"
-    required>
-  <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-  <mat-datepicker #picker1></mat-datepicker>
-  <mat-error>This field is required</mat-error>
-</mat-form-field>
-
-<mat-form-field>
-  <input matInput [matDatepickerFilter]="myFilter" [matDatepicker]="picker2" placeholder="End:" [formControl]="formEndDate" (dateChange)="setEndDate(event)" 
-  required [disabled]="startDatePicked==false" [value]="formStartDate.value" [min]="minDate">
-  <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-  <mat-datepicker #picker2></mat-datepicker>
-  <mat-error>This field is required</mat-error>
-</mat-form-field>
+<div class="dates">
+  <mat-form-field>
+    <input matInput [matDatepickerFilter]="myFilter" [matDatepicker]="picker1" placeholder="Start:" [formControl]="formStartDate" (dateChange)="setStartDate(event)"
+      required>
+    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+    <mat-datepicker #picker1></mat-datepicker>
+    <mat-error>This field is required</mat-error>
+  </mat-form-field>
+  
+  <mat-form-field>
+    <input matInput [matDatepickerFilter]="myFilter" [matDatepicker]="picker2" placeholder="End:" [formControl]="formEndDate" (dateChange)="setEndDate(event)"
+    [disabled]="startDatePicked==false" [value]="formStartDate.value" [min]="minDate">
+    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+    <mat-datepicker #picker2></mat-datepicker>
+    <mat-error>This field is required</mat-error>
+  </mat-form-field>
+</div>
 
 <div>Number of day: {{nbOfDays}}</div>
 
-<form>
-  <button type='submit' (click)='submit()'>Submit</button>
-</form>
+<div class="submit">
+  <button mat-flat-button type='submit' (click)='submit()'>Submit</button>
+</div>

@@ -32,5 +32,12 @@ namespace Demandes_Absences.Controllers
         {
             bo.AddAbsence(absence); //todo verify null?
         }
+
+        [HttpPut("[action]")]
+        public void ChangeStatus(string status, int id)
+        {
+            bo.ChangeStatus(status, id); //todo verify null?
+        }
+        
     }
 }

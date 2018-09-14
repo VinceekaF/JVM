@@ -42,14 +42,14 @@ export class AbsenceRequestComponent implements OnInit {
 
   setStartDate() {
     this.startDatePicked = true;
-    this.startDate = Moment(this.formStartDate.value, 'M/D/YYYY').startOf('day');
+    this.startDate = Moment(this.formStartDate.value, 'M/D/YYYY').startOf('day').utc(true);
     this.endDate = this.startDate;
     this.minDate = (this.startDate).toDate();
     this.setDates();
   }
 
   setEndDate() {
-    this.endDate = Moment(this.formEndDate.value, 'M/D/YYYY').startOf('day');
+    this.endDate = Moment(this.formEndDate.value, 'M/D/YYYY').startOf('day').utc(true);
     this.setDates();
   }
 
@@ -58,6 +58,9 @@ export class AbsenceRequestComponent implements OnInit {
     let offset: number;
     let nbOfWeekendDays: number;
     this.nbOfDays = Moment.duration(this.endDate.diff(this.startDate)).asDays();
+    console.log("start: " + this.startDate);
+    console.log("end: " + this.endDate);
+    console.log(this.nbOfDays);
 
     if (this.startDate.weekday() === 1 && this.nbOfDays >= 7) {  // check if startDate = Monday
       offset = 5;
