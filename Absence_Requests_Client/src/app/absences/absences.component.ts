@@ -22,7 +22,13 @@ export class AbsencesComponent implements OnInit {
   role: string;
   isManager:boolean = false;
   isEmployee:boolean = true;
-  // reasons: string[] = ['No Filter', 'PaidVacation', 'RTT', 'SickChild', 'LeaveFamilyEvents']; //needed ??
+  statusInProgress: string = 'InProgress';
+
+  public seeAll:boolean = true;
+  public buttonName:any = 'See All';
+
+  ReasonForm: FormGroup;
+  reasons: string[] = ['No Filter', 'PaidVacation', 'RTT', 'SickChild', 'LeaveFamilyEvents'];
 
   
   constructor(
@@ -32,6 +38,9 @@ export class AbsencesComponent implements OnInit {
   ngOnInit() {
     this.choiceForm = this.fb.group({
       choiceControl: ['Order by Nothing']
+    });
+    this.ReasonForm = this.fb.group({
+      ReasonControl: ['No Filter']
     });
     this.getAbsences();
   }
@@ -76,20 +85,35 @@ export class AbsencesComponent implements OnInit {
     if (this.role == "Manager"){
       this.isManager = true;
       this.isEmployee = false;
+      this.getAbsencesInProgress();
     }
     else{
       this.isManager = false;
       this.isEmployee = true;
+      this.getAbsences();
     }
     console.log(this.role);
   }
 
-  changeStatus(status: string, id: number){
-    console.log(id);
-    console.log(status);
-    this.absenceService.changeStatus(status,id).subscribe(a => this.absences = a);
+  changeStatus(status: string, absence: Absence){
+    let absenceToChange = absence;
+    absenceToChange.status = status;
+    this.absenceService.changeStatus(absenceToChange).subscribe(a => absenceToChange = a);
   }
 
-  
+  getAbsencesInProgress(): void {
+    this.absenceService.getAbsencesInProgress(this.statusInProgress).subscribe(abs => this.absences = abs);
+  }
 
+  toggle() {
+    this.seeAll = !this.seeAll;
+    if(this.seeAll)  {
+      this.buttonName = "See All";
+      this.getAbsencesInProgress();
+    }
+    else{
+      this.buttonName = "See In Progress";
+      this.getAbsences();
+    }
+  }
 }

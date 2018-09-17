@@ -14,23 +14,19 @@ import {
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CdkTableModule } from '@angular/cdk/table';
 import { CdkTreeModule } from '@angular/cdk/tree';
-import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 
 import { AppComponent } from './app.component';
 import { AbsencesComponent } from './absences/absences.component';
 import { AppRoutingModule } from './/app-routing.module';
 import { AbsenceRequestComponent } from './absence-request/absence-request.component';
-import { AppReasonComponent } from './app-reason/app-reason.component';
 import { AbsenceService } from './absence.service';
-import { StarterComponent } from './starter/starter.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     AbsencesComponent,
-    AbsenceRequestComponent,
-    AppReasonComponent,
-    StarterComponent
+    AbsenceRequestComponent
   ],
   imports: [
     BrowserModule,

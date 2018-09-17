@@ -28,8 +28,10 @@ namespace Demandes_Absences.BL
 
         public void AddAbsence(Absence absence)
         {
+            int x = GetAllAbsence().ToList().LastOrDefault().Id; //TODO: DELETE asa GUID is op
             absence.EmissionDate = DateTime.Now;    //todo : initialize in front
             absence.Status = Status.InProgress;     //todo : initialize in front
+            absence.Id = x+1;
             absenceRepository.AddAbsence(absence);
         }
 
@@ -60,18 +62,23 @@ namespace Demandes_Absences.BL
             return absences;
         }
 
-        public void ChangeStatus(string status, int id)
+        public void ChangeStatus(Absence absence)
         {
-            var AbsenceToChange = absenceRepository.GetAllAbsence().SingleOrDefault(a => a.Id == id);
+            var AbsenceToChange = absenceRepository.GetAllAbsence().SingleOrDefault(a => a.Id == absence.Id);
 
-            if (status == "Accept")
+            if (absence.Status.ToString() == "Approved")
             {
                 AbsenceToChange.Status = Status.Approved;
             }
-            else if(status == "Refuse")
+            else if(absence.Status.ToString() == "Refused")
             {
                 AbsenceToChange.Status = Status.Refused;
             }
+        }
+
+        public IEnumerable<Absence> GetAbsencesInProgress(string status)
+        {
+            return absenceRepository.GetAllAbsence().Where(n => n.Status.ToString() == status);
         }
     }
 }

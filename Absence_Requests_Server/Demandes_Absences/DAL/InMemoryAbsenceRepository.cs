@@ -40,7 +40,8 @@ namespace Demandes_Absences.DAL
                new Absence() {Id= 3, EmissionDate=new DateTime(2018, 04, 12), StartDate=new DateTime(2018, 04, 10), EndDate=new DateTime(2018, 04, 20), Reason=Reason.RTT, Status=Status.Approved},
                new Absence() {Id= 4, EmissionDate=new DateTime(2018, 04, 02), StartDate=new DateTime(2018, 04, 05), EndDate=new DateTime(2018, 04, 06), Reason=Reason.SickChild, Status=Status.Approved},
                new Absence() {Id= 5, EmissionDate=new DateTime(2018, 03, 03), StartDate=new DateTime(2018, 12, 06), EndDate=new DateTime(2018, 12, 08), Reason=Reason.LeaveFamilyEvents, Status=Status.InProgress},
-               new Absence() {Id= 6, EmissionDate=new DateTime(2018, 07, 01), StartDate=new DateTime(2018, 07, 16), EndDate=new DateTime(2018, 07, 20), Reason=Reason.PaidVacation, Status=Status.Approved}
+               new Absence() {Id= 6, EmissionDate=new DateTime(2018, 07, 01), StartDate=new DateTime(2018, 07, 16), EndDate=new DateTime(2018, 07, 20), Reason=Reason.PaidVacation, Status=Status.Approved},
+               new Absence() {Id= 7, EmissionDate=new DateTime(2018, 09, 17), StartDate=new DateTime(2018, 09, 19), EndDate=new DateTime(2018, 10, 16), Reason=Reason.PaidVacation, Status=Status.InProgress}
             };
 
         public IEnumerable<Absence> GetAllAbsence()
@@ -52,5 +53,6 @@ namespace Demandes_Absences.DAL
         {
             absences.Add(absence);
         }
+
     }
 }

@@ -2,12 +2,6 @@ table {
     width: 100%;
 }
 
-#addAbsenceButton {
-  width: 250px;
-  height: 100%;
-  font-size: 18px;
-}
-
 .sort {
   display: flex;
   justify-content: space-around;
@@ -21,14 +15,14 @@ table {
 
 
 
-button.mat-flat-button {
+button.mat-flat-button, a.mat-flat-button {
   font-size: 20px;
-  width: 150px;
+  width: 180px;
   height: 45px;
 }
 
 a {
-  color: rgb(255, 255, 255);
+  /* color: rgb(255, 255, 255); */
   text-decoration: none;
 }
 

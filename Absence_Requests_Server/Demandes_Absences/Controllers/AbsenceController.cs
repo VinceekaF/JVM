@@ -34,10 +34,16 @@ namespace Demandes_Absences.Controllers
         }
 
         [HttpPut("[action]")]
-        public void ChangeStatus(string status, int id)
+        public void ChangeStatus(Absence absence)
         {
-            bo.ChangeStatus(status, id); //todo verify null?
+            bo.ChangeStatus(absence); //todo verify null?
         }
-        
+
+        [HttpGet("[action]")]
+        public List<Absence> GetAbsencesInProgress(string status)
+        {
+            return bo.GetAbsencesInProgress(status).ToList();
+        }
+
     }
 }

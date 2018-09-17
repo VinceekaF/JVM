@@ -48,4 +48,11 @@ export class AbsenceService {
     return this.http.put<Absence>(url,absenceToChange, { headers: this.headers }).pipe(
       catchError(this.handleError<Absence>('absence')));
   }
+
+  public getAbsencesInProgress(statusInProgress : string): Observable<Absence[]> {
+    const data = { 'status': statusInProgress };
+    const url = `${this.accessPointUrl}/GetAbsencesInProgress`;
+    return this.http.get<Absence[]>(url, { params: data }).pipe(
+      catchError(this.handleError<Absence[]>('absences',[])));
+  }
 }

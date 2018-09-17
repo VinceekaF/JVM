@@ -1,7 +1,12 @@
 <label>
   Reason
 </label>
-<app-app-reason (change)="reasonChange($event.target.value)"></app-app-reason>
+<mat-form-field [formGroup]="ReasonForm">
+    <mat-select formControlName="ReasonControl" (selectionChange)="reasonChange($event.value)">
+      <mat-option [value]="reason" *ngFor="let reason of reasons">{{reason}}</mat-option>
+    </mat-select>
+</mat-form-field>
+
 
 <div class="dates">
   <mat-form-field>

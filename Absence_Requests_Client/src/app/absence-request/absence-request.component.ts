@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
-import { FormControl } from '@angular/forms';
+import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
 import * as Moment from 'moment';
 
 import { AbsenceService } from '../absence.service';
@@ -21,12 +21,18 @@ export class AbsenceRequestComponent implements OnInit {
   nbOfDays: number;
   startDatePicked = false;
   minDate: Date;
+  ReasonForm: FormGroup;
+  reasons: string[] = ['No Filter', 'PaidVacation', 'RTT', 'SickChild', 'LeaveFamilyEvents'];
 
   constructor(
     private absenceService: AbsenceService,
-    private location: Location) { }
+    private location: Location,
+    private fb: FormBuilder) { }
 
     ngOnInit() {
+      this.ReasonForm = this.fb.group({
+        ReasonControl: ['No Filter']
+      });
     }
 
 
@@ -89,7 +95,7 @@ export class AbsenceRequestComponent implements OnInit {
     // both date should be selected
     // endDate>=startDate
     // we should not select weekend
-
+   
     let absence: Absence = {
       startDate: this.startDate.toDate(),
       endDate: this.endDate.toDate(),
@@ -98,7 +104,7 @@ export class AbsenceRequestComponent implements OnInit {
 
       emissionDate: this.startDate.toDate(),  // need to be current date
       status: 'InProgress',
-      id: 0 // guid
+      id: 10// guid
     };
 
     this.absenceService.submit(absence).subscribe(a => absence = a);

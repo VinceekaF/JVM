@@ -1,9 +1,3 @@
-<!-- <form [formGroup]="choiceForm">
-  <select formControlName="choiceControl" (change)="onChange($event.target.value)">
-    <option [value]="choice" *ngFor="let choice of choices">{{choice}}</option>
-  </select>
-</form> -->
-
 <mat-tab-group (selectedTabChange)="changeRole($event.tab.textLabel)">
   <mat-tab label="Employee"></mat-tab>
   <mat-tab label="Manager"></mat-tab>
@@ -20,10 +14,17 @@
     <label>
       Filter By
     </label>
-    <app-app-reason (selectionChange)="onChangeFilter($event.value)"></app-app-reason>
+    <mat-form-field [formGroup]="ReasonForm">
+        <mat-select formControlName="ReasonControl" (selectionChange)="onChangeFilter($event.value)">
+          <mat-option [value]="reason" *ngFor="let reason of reasons">{{reason}}</mat-option>
+        </mat-select>
+    </mat-form-field>
   </div>
 
-  <a *ngIf='isEmployee' mat-flat-button	id="addAbsenceButton" routerLink="/absence-request">Add</a>
+  <a *ngIf='isEmployee' mat-flat-button routerLink="/absence-request">Add</a>
+
+  <button mat-flat-button *ngIf='isManager && seeAll==false' type='button' (click)='toggle()'>{{buttonName}}</button>
+  <button mat-flat-button *ngIf='isManager && seeAll==true' type='button' (click)='toggle()'>{{buttonName}}</button>
 </div>  
 
 
@@ -55,14 +56,14 @@
   </ng-container>
 
   <ng-container  matColumnDef="Validation">
-      <th mat-header-cell *matHeaderCellDef> Validation </th>
-      <td mat-cell *matCellDef="let absence">
-        <mat-form-field *ngIf='absence.status == "InProgress" && isManager'>
-          <mat-select [value]="selected" (selectionChange)="changeStatus($event.value,absence.id)">
-            <mat-option value="Accept">Accept</mat-option>
-            <mat-option value="Refuse">Refuse</mat-option>
-          </mat-select>
-        </mat-form-field>
+    <th mat-header-cell *matHeaderCellDef> Validation </th>
+    <td mat-cell *matCellDef="let absence">
+      <mat-form-field *ngIf='absence.status == "InProgress" && isManager'>
+        <mat-select [value]="selected" (selectionChange)="changeStatus($event.value,absence)">
+          <mat-option value="Approved">Accept</mat-option>
+          <mat-option value="Refused">Refuse</mat-option>
+        </mat-select>
+      </mat-form-field>
     </td>
   </ng-container>
 
