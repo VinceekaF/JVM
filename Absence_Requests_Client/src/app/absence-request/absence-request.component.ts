@@ -19,7 +19,6 @@ export class AbsenceRequestComponent implements OnInit {
   startDate: Moment.Moment;
   endDate: Moment.Moment;
   nbOfDays: number;
-  startDatePicked = false;
   minDate: Date;
   ReasonForm: FormGroup;
   reasons: string[] = ['No Filter', 'PaidVacation', 'RTT', 'SickChild', 'LeaveFamilyEvents'];
@@ -33,6 +32,7 @@ export class AbsenceRequestComponent implements OnInit {
       this.ReasonForm = this.fb.group({
         ReasonControl: ['No Filter']
       });
+      this.setStartDate();
     }
 
 
@@ -47,7 +47,6 @@ export class AbsenceRequestComponent implements OnInit {
   }
 
   setStartDate() {
-    this.startDatePicked = true;
     this.startDate = Moment(this.formStartDate.value, 'M/D/YYYY').startOf('day').utc(true);
     this.endDate = this.startDate;
     this.minDate = (this.startDate).toDate();
@@ -99,13 +98,13 @@ export class AbsenceRequestComponent implements OnInit {
     let absence: Absence = {
       startDate: this.startDate.toDate(),
       endDate: this.endDate.toDate(),
-
       reason: this.reasonChoice,  // can't be "no filter"
-
-      emissionDate: this.startDate.toDate(),  // need to be current date
+      emissionDate: new Date(),
       status: 'InProgress',
-      id: 10// guid
+      id: 10 // guid
     };
+
+    console.log(absence.emissionDate);
 
     this.absenceService.submit(absence).subscribe(a => absence = a);
     this.goBack();  // need to wait before redirect

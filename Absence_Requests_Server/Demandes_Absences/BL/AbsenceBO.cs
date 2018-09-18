@@ -31,7 +31,7 @@ namespace Demandes_Absences.BL
             int x = GetAllAbsence().ToList().LastOrDefault().Id; //TODO: DELETE asa GUID is op
             absence.EmissionDate = DateTime.Now;    //todo : initialize in front
             absence.Status = Status.InProgress;     //todo : initialize in front
-            absence.Id = x+1;
+            absence.Id = x+1;  //TODO: DELETE asa GUID is op
             absenceRepository.AddAbsence(absence);
         }
 
