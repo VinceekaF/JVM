@@ -11,7 +11,7 @@ import { Absence } from './absence';
 
 export class AbsenceService {
   private headers: HttpHeaders;
-  private accessPointUrl = 'http://localhost:50418/api/Absence';
+  private accessPointUrl = 'http://localhost:55486/api/Absence';
 
   constructor(private http: HttpClient) {
     this.headers = new HttpHeaders({ 'Content-Type': 'application/json; charset=utf-8' });
@@ -55,4 +55,11 @@ export class AbsenceService {
     return this.http.get<Absence[]>(url, { params: data }).pipe(
       catchError(this.handleError<Absence[]>('absences',[])));
   }
+
+  public getReasons(): Observable<string[]> {
+    const url = `${this.accessPointUrl}/GetReasons`;
+    return this.http.get<string[]>(url, { headers: this.headers }).pipe(
+      catchError(this.handleError<string[]>('resons', [])));
+  }
+  
 }

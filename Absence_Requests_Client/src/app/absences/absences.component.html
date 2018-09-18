@@ -5,17 +5,14 @@
 
 <div class="sort">
   <mat-form-field [formGroup]="choiceForm">
-      <mat-select formControlName="choiceControl" (selectionChange)="onChangeChoice($event.value)">
+      <mat-select placeholder="Order by" formControlName="choiceControl" (selectionChange)="onChangeChoice($event.value)">
         <mat-option [value]="choice" *ngFor="let choice of choices">{{choice}}</mat-option>
       </mat-select>
   </mat-form-field>
 
   <div>
-    <label>
-      Filter By
-    </label>
     <mat-form-field [formGroup]="ReasonForm">
-        <mat-select formControlName="ReasonControl" (selectionChange)="onChangeFilter($event.value)">
+        <mat-select placeholder="Filter by" formControlName="ReasonControl" (selectionChange)="onChangeFilter($event.value)">
           <mat-option [value]="reason" *ngFor="let reason of reasons">{{reason}}</mat-option>
         </mat-select>
     </mat-form-field>

@@ -45,5 +45,11 @@ namespace Demandes_Absences.Controllers
             return bo.GetAbsencesInProgress(status).ToList();
         }
 
+        [HttpGet("[action]")]
+        public IEnumerable<string> GetReasons()
+        {
+            return bo.GetReasons();
+        }
+
     }
 }

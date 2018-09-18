@@ -19,7 +19,7 @@
   
   <mat-form-field>
     <input matInput [matDatepickerFilter]="myFilter" [matDatepicker]="picker2" placeholder="End:" [formControl]="formEndDate" (dateChange)="setEndDate(event)"
-    [disabled]="startDatePicked==false" [value]="formStartDate.value" [min]="minDate">
+    [value]="formStartDate.value" [min]="minDate">
     <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
     <mat-datepicker #picker2></mat-datepicker>
     <mat-error>This field is required</mat-error>

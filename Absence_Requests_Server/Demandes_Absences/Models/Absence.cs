@@ -13,14 +13,12 @@ namespace Demandes_Absences.Models
         public DateTime EmissionDate { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
-
-        [JsonConverter(typeof(StringEnumConverter))]
-        public Reason Reason { get; set; }
-
-        [JsonConverter(typeof(StringEnumConverter))]
-        public Status Status { get; set; }
+        public string Reason { get; set; }
+        public string Status { get; set; }
     }
 
+    /*
+     *  // [JsonConverter(typeof(StringEnumConverter))]
     public enum Reason
     {
         PaidVacation,
@@ -35,4 +33,5 @@ namespace Demandes_Absences.Models
         Approved,
         Refused
     }
+    */
 }

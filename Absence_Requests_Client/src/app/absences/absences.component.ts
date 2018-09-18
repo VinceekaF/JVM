@@ -9,55 +9,56 @@ import { Absence } from '../absence';
   templateUrl: './absences.component.html',
   styleUrls: ['./absences.component.css']
 })
-@Directive({selector: '[app-app-reason]'})
+@Directive({ selector: '[app-app-reason]' })
 
 export class AbsencesComponent implements OnInit {
   choiceForm: FormGroup;
   absences: Absence[];
-  choices: string[] = ['Order by Nothing', 'Order by Emission date', 'Order by Start Date'];
-  displayedColumns: string[] = ['Date', 'Reason', 'Start', 'End', 'Status','Validation'];
+  choices: string[] = ['Nothing', 'Emission date', 'Start Date'];
+  displayedColumns: string[] = ['Date', 'Reason', 'Start', 'End', 'Status', 'Validation'];
 
-  sortChoice = 'Order by Nothing';
+  sortChoice = 'Nothing';
   reasonChoice: string = null;
   role: string;
-  isManager:boolean = false;
-  isEmployee:boolean = true;
-  statusInProgress: string = 'InProgress';
+  isManager: boolean = false;
+  isEmployee: boolean = true;
+  statusInProgress: string = 'In progress';
 
-  public seeAll:boolean = true;
-  public buttonName:any = 'See All';
+  public seeAll: boolean = true;
+  public buttonName: any = 'See All';
 
   ReasonForm: FormGroup;
-  reasons: string[] = ['No Filter', 'PaidVacation', 'RTT', 'SickChild', 'LeaveFamilyEvents'];
+  reasons: string[] = [];
 
-  
   constructor(
     private absenceService: AbsenceService,
     private fb: FormBuilder) { }
 
   ngOnInit() {
+    this.reasons.push('No Filter');
+    this.absenceService.getReasons().subscribe(r => this.reasons = this.reasons.concat(r));
     this.choiceForm = this.fb.group({
-      choiceControl: ['Order by Nothing']
+      choiceControl: ['Nothing']
     });
     this.ReasonForm = this.fb.group({
       ReasonControl: ['No Filter']
     });
     this.getAbsences();
   }
-  
-  
+
+
   onChangeChoice(choiceValue: string): void {
     console.log(choiceValue);
     this.sortChoice = choiceValue;
-    if (this.sortChoice === 'Order by Emission date') {
+    if (this.sortChoice === 'Emission date') {
       this.sortChoice = 'emissionDate';
-    } else if (this.sortChoice === 'Order by Start Date') {
+    } else if (this.sortChoice === 'Start Date') {
       this.sortChoice = 'startDate';
     }
-    
+
     this.getAbsencesFilteredAndSorted();
   }
-  
+
   onChangeFilter(reasonValue: string): void {
     console.log(reasonValue);
 
@@ -77,17 +78,17 @@ export class AbsencesComponent implements OnInit {
     this.absenceService.getAbsences().subscribe(abs => this.absences = abs);
   }
 
-  changeRole(role: string): void{
-    if(role != this.role){
+  changeRole(role: string): void {
+    if (role != this.role) {
       this.role = role;
     }
 
-    if (this.role == "Manager"){
+    if (this.role == "Manager") {
       this.isManager = true;
       this.isEmployee = false;
       this.getAbsencesInProgress();
     }
-    else{
+    else {
       this.isManager = false;
       this.isEmployee = true;
       this.getAbsences();
@@ -95,7 +96,7 @@ export class AbsencesComponent implements OnInit {
     console.log(this.role);
   }
 
-  changeStatus(status: string, absence: Absence){
+  changeStatus(status: string, absence: Absence) {
     let absenceToChange = absence;
     absenceToChange.status = status;
     this.absenceService.changeStatus(absenceToChange).subscribe(a => absenceToChange = a);
@@ -107,11 +108,11 @@ export class AbsencesComponent implements OnInit {
 
   toggle() {
     this.seeAll = !this.seeAll;
-    if(this.seeAll)  {
+    if (this.seeAll) {
       this.buttonName = "See All";
       this.getAbsencesInProgress();
     }
-    else{
+    else {
       this.buttonName = "See In Progress";
       this.getAbsences();
     }
