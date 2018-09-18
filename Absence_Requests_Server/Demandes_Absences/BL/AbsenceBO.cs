@@ -18,26 +18,27 @@ namespace Demandes_Absences.BL
 
         public IEnumerable<Absence> FilterByReason(string reason)
         {
-            return absenceRepository.GetAllAbsence().Where(n => n.Reason.ToString() == reason);
+            return absenceRepository.GetAllAbsence().Where(n => n.Reason == reason);
         }
 
-        public IEnumerable<string> GetReasons()     //todo : really need it ?
+        public IEnumerable<string> GetReasons()   
         {
-            return Enum.GetNames(typeof(Reason));
+            //  return Enum.GetNames(typeof(Reason));
+            return absenceRepository.GetReasons();
         }
 
         public void AddAbsence(Absence absence)
         {
             int x = GetAllAbsence().ToList().LastOrDefault().Id; //TODO: DELETE asa GUID is op
             absence.EmissionDate = DateTime.Now;    //todo : initialize in front
-            absence.Status = Status.InProgress;     //todo : initialize in front
             absence.Id = x+1;  //TODO: DELETE asa GUID is op
+            absence.Status = "In progress";     //todo : initialize in front
             absenceRepository.AddAbsence(absence);
         }
 
         public IEnumerable<Absence> GetAbsencesFilteredAndSorted(string reason, string sortingDate)
         {
-            if (reason != "null")
+            if (reason != "null" && reason != "No Filter")
             {
                 return SortAbsences(FilterByReason(reason), sortingDate);
             }
@@ -65,20 +66,12 @@ namespace Demandes_Absences.BL
         public void ChangeStatus(Absence absence)
         {
             var AbsenceToChange = absenceRepository.GetAllAbsence().SingleOrDefault(a => a.Id == absence.Id);
-
-            if (absence.Status.ToString() == "Approved")
-            {
-                AbsenceToChange.Status = Status.Approved;
-            }
-            else if(absence.Status.ToString() == "Refused")
-            {
-                AbsenceToChange.Status = Status.Refused;
-            }
+            AbsenceToChange.Status = absence.Status;
         }
 
         public IEnumerable<Absence> GetAbsencesInProgress(string status)
         {
-            return absenceRepository.GetAllAbsence().Where(n => n.Status.ToString() == status);
+            return absenceRepository.GetAllAbsence().Where(n => n.Status == status);
         }
     }
 }

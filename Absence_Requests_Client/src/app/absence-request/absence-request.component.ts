@@ -13,7 +13,7 @@ import { Absence } from '../absence';
 })
 
 export class AbsenceRequestComponent implements OnInit {
-  reasonChoice = 'No Filter';
+  reasonChoice : string = null;
   formStartDate = new FormControl(new Date());
   formEndDate = new FormControl(new Date());
   startDate: Moment.Moment;
@@ -21,26 +21,28 @@ export class AbsenceRequestComponent implements OnInit {
   nbOfDays: number;
   minDate: Date;
   ReasonForm: FormGroup;
-  reasons: string[] = ['No Filter', 'PaidVacation', 'RTT', 'SickChild', 'LeaveFamilyEvents'];
+  reasons: string[] = [];
 
   constructor(
     private absenceService: AbsenceService,
     private location: Location,
     private fb: FormBuilder) { }
 
-    ngOnInit() {
-      this.ReasonForm = this.fb.group({
-        ReasonControl: ['No Filter']
-      });
-      this.setStartDate();
-    }
+  ngOnInit() {
+    this.absenceService.getReasons().subscribe(r => this.reasons = r);
+
+    this.ReasonForm = this.fb.group({
+      ReasonControl: ['No Filter']
+    });
+    this.setStartDate();
+  }
 
 
-    myFilter = (d: Date): boolean => {
-      const day = d.getDay();
-      // Prevent Saturday and Sunday from being selected.
-      return day !== 0 && day !== 6;
-    }
+  myFilter = (d: Date): boolean => {
+    const day = d.getDay();
+    // Prevent Saturday and Sunday from being selected.
+    return day !== 0 && day !== 6;
+  }
 
   reasonChange(reasonValue: string): void {
     this.reasonChoice = reasonValue;
@@ -89,25 +91,23 @@ export class AbsenceRequestComponent implements OnInit {
     this.nbOfDays++;
   }
 
-  submit(): void {
+  submit(): Promise<void> {
     // todo : need validation before submit, otherwise some corrupted value could be send
     // both date should be selected
     // endDate>=startDate
     // we should not select weekend
-   
+
     let absence: Absence = {
       startDate: this.startDate.toDate(),
       endDate: this.endDate.toDate(),
       reason: this.reasonChoice,  // can't be "no filter"
-      emissionDate: new Date(),
-      status: 'InProgress',
-      id: 10 // guid
+      emissionDate: new Date(),  // need to be current date
+      status: 'In progress',
+      id: 10// guid
     };
 
-    console.log(absence.emissionDate);
+    return this.absenceService.submit(absence).toPromise().then(() => this.goBack());
 
-    this.absenceService.submit(absence).subscribe(a => absence = a);
-    this.goBack();  // need to wait before redirect
   }
 
   goBack(): void {

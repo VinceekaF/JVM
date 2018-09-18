@@ -55,4 +55,11 @@ export class AbsenceService {
     return this.http.get<Absence[]>(url, { params: data }).pipe(
       catchError(this.handleError<Absence[]>('absences',[])));
   }
+
+  public getReasons(): Observable<string[]> {
+    const url = `${this.accessPointUrl}/GetReasons`;
+    return this.http.get<string[]>(url, { headers: this.headers }).pipe(
+      catchError(this.handleError<string[]>('resons', [])));
+  }
+  
 }

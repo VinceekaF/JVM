@@ -10,5 +10,7 @@ namespace Demandes_Absences.Models
         IEnumerable<Absence> GetAllAbsence();
 
         void AddAbsence(Absence absence);
+
+        IEnumerable<string> GetReasons();
     }
 }

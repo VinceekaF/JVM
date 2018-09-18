@@ -6,17 +6,14 @@ table {
   display: flex;
   justify-content: space-around;
   align-items: center;
-}
-
-.role {
-  display: flex;
-  justify-content: space-evenly;
+  margin-top: 10px;
 }
 
 button.mat-flat-button, a.mat-flat-button {
   font-size: 20px;
   width: 180px;
   height: 45px;
+
 }
 
 a {
